@@ -1,0 +1,61 @@
+`timescale 1ns/1ps
+
+module i2c_master_tb;
+
+    reg clk;
+    reg reset;
+    reg start;
+    reg rw;
+    reg [6:0] slave_addr;
+    reg [7:0] tx_data;
+
+    wire [7:0] rx_data;
+    wire busy;
+    wire done;
+    wire ack_error;
+    wire scl;
+    wire sda;
+
+    i2c_master uut (
+        .clk        (clk),
+        .reset      (reset),
+        .start      (start),
+        .rw         (rw),
+        .slave_addr (slave_addr),
+        .tx_data    (tx_data),
+        .rx_data    (rx_data),
+        .busy       (busy),
+        .done       (done),
+        .ack_error  (ack_error),
+        .scl        (scl),
+        .sda        (sda)
+    );
+
+    always #5 clk = ~clk;
+
+    initial begin
+
+        clk = 1'b0;
+        reset = 1'b1;
+        start = 1'b0;
+        rw = 1'b0;
+        slave_addr = 7'h50;
+        tx_data = 8'hA5;
+
+        #20;
+        reset = 1'b0;
+
+        // Start I2C write transaction
+        #20;
+        start = 1'b1;
+
+        #10;
+        start = 1'b0;
+
+        #200;
+
+        $stop;
+
+    end
+
+endmodule

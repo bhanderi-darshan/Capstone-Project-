@@ -1,0 +1,79 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/ALL SEM/SEM 7/CP/ahb-i2c-controller/fpga/simulation/modelsim
+vahb_i2c_controller
+!s110 1790656339
+!i10b 1
+!s100 G8]abL8VHF9HYHMQKmLK63
+Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IVdG>IA`6QAXgIJe5gJ2PX2
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1790576941
+8D:/ALL SEM/SEM 7/CP/ahb-i2c-controller/rtl/ahb_i2c_controller.v
+FD:/ALL SEM/SEM 7/CP/ahb-i2c-controller/rtl/ahb_i2c_controller.v
+!i122 0
+L0 1 128
+Z3 OV;L;2020.1;71
+r1
+!s85 0
+31
+!s108 1790656339.000000
+!s107 D:/ALL SEM/SEM 7/CP/ahb-i2c-controller/rtl/ahb_i2c_controller.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/ALL SEM/SEM 7/CP/ahb-i2c-controller/rtl|D:/ALL SEM/SEM 7/CP/ahb-i2c-controller/rtl/ahb_i2c_controller.v|
+!i113 1
+o-vlog01compat -work work
+!s92 -vlog01compat -work work {+incdir+D:/ALL SEM/SEM 7/CP/ahb-i2c-controller/rtl}
+Z4 tCvgOpt 0
+vi2c_master
+Z5 !s110 1790656976
+!i10b 1
+!s100 i2>lZ5bl]I822FD3_AER23
+R1
+I5Y`7?ijIVEhBzV][6X]0:1
+R2
+R0
+w1790656869
+8D:/ALL SEM/SEM 7/CP/ahb-i2c-controller/rtl/i2c_master.v
+FD:/ALL SEM/SEM 7/CP/ahb-i2c-controller/rtl/i2c_master.v
+!i122 5
+L0 1 231
+R3
+r1
+!s85 0
+31
+Z6 !s108 1790656976.000000
+!s107 D:/ALL SEM/SEM 7/CP/ahb-i2c-controller/rtl/i2c_master.v|
+!s90 -reportprogress|300|D:/ALL SEM/SEM 7/CP/ahb-i2c-controller/rtl/i2c_master.v|
+!i113 1
+R4
+vi2c_master_tb
+R5
+!i10b 1
+!s100 `O4IBS0SKHTBRSg`kF>aM3
+R1
+ILYRJ<LPzXnEUTUA>K16a[2
+R2
+R0
+w1790656884
+8D:/ALL SEM/SEM 7/CP/ahb-i2c-controller/tb/i2c_master_tb.v
+FD:/ALL SEM/SEM 7/CP/ahb-i2c-controller/tb/i2c_master_tb.v
+!i122 6
+L0 3 98
+R3
+r1
+!s85 0
+31
+R6
+!s107 D:/ALL SEM/SEM 7/CP/ahb-i2c-controller/tb/i2c_master_tb.v|
+!s90 -reportprogress|300|D:/ALL SEM/SEM 7/CP/ahb-i2c-controller/tb/i2c_master_tb.v|
+!i113 1
+R4

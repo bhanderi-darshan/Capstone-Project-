@@ -1,0 +1,10 @@
+
+State Machine - |ahb_i2c_controller|state
+Name state.STOP state.READ_DATA state.WRITE_DATA state.CHECK_ACK state.SEND_ADDR state.START state.IDLE 
+state.IDLE 0 0 0 0 0 0 0 
+state.START 0 0 0 0 0 1 1 
+state.SEND_ADDR 0 0 0 0 1 0 1 
+state.CHECK_ACK 0 0 0 1 0 0 1 
+state.WRITE_DATA 0 0 1 0 0 0 1 
+state.READ_DATA 0 1 0 0 0 0 1 
+state.STOP 1 0 0 0 0 0 1 

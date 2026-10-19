@@ -1,0 +1,35 @@
+`timescale 1ns/1ps
+
+module i2c_clock_gen_tb;
+
+    reg clk;
+    reg reset;
+    reg [15:0] clock_div;
+
+    wire scl;
+
+    i2c_clock_gen uut (
+        .clk      (clk),
+        .reset    (reset),
+        .clock_div(clock_div),
+        .scl      (scl)
+    );
+
+    always #5 clk = ~clk;
+
+    initial begin
+
+        clk       = 1'b0;
+        reset     = 1'b1;
+        clock_div = 16'd4;
+
+        #20;
+        reset = 1'b0;
+
+        #200;
+
+        $stop;
+
+    end
+
+endmodule
