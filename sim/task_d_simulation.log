@@ -1,0 +1,147 @@
+﻿VCD info: dumpfile sim/tb_i2c_master.vcd opened for output.
+============================================================================
+Starting Comprehensive Task C Verification: AHB-Lite I2C Master Controller
+============================================================================
+
+--- Test Suite 1: Reset and Bus Idle Behavior ---
+  [PASS] Test  1: hw_busy_o is 0 at reset
+  [PASS] Test  2: hw_tx_empty_o is 1 at reset
+  [PASS] Test  3: scl_drive_low_m is 0 (released) at reset
+  [PASS] Test  4: sda_drive_low_m is 0 (released) at reset
+  [PASS] Test  5: scl_bus floats HIGH
+  [PASS] Test  6: sda_bus floats HIGH
+
+--- Test Suite 2: Bus-Busy START Rejection ---
+  [PASS] Test  7: START rejected when SDA is LOW: hw_busy_o remains 0
+  [PASS] Test  8: START rejected: Master does not pull SCL LOW
+  [PASS] Test  9: START rejected: hw_ack_error_o is NOT asserted
+  [PASS] Test 10: START rejected: hw_done_o is NOT asserted
+
+--- Test Suite 3: START Framing & Timing Verification ---
+  [PASS] Test 11: START command completed (hw_done asserted)
+  [PASS] Test 12: hw_busy_o asserted during transaction
+  [PASS] Test 13: hw_tx_empty_o remains 1 in ST_CMD_READY
+  [PASS] Test 14: SCL held LOW in ST_CMD_READY
+    [Timing] Measured t_HD;STA = 5000 ns (Target = 5000 ns, Spec >= 4000 ns)
+  [PASS] Test 15: START hold time t_HD;STA satisfies Spec (>= 4000 ns)
+
+--- Test Suite 4: Address Transmission with Slave ACK ---
+  [PASS] Test 16: hw_tx_empty_o drops to 0 during transmission
+  [PASS] Test 17: Address Write complete (hw_done asserted)
+  [PASS] Test 18: Slave captured correct 7-bit address 0x50
+  [PASS] Test 19: Slave captured Write direction (R/W = 0)
+  [PASS] Test 20: hw_tx_empty_o returns to 1 after Address ACK
+  [PASS] Test 21: hw_busy_o remains 1 in ST_CMD_READY after Address ACK
+  [PASS] Test 22: SCL held LOW between Address and Data
+
+--- Test Suite 5: Single-Byte Write with Slave ACK & Manual STOP ---
+  [PASS] Test 23: hw_tx_empty_o drops to 0 during data write
+  [PASS] Test 24: Data Write complete (hw_done asserted)
+  [PASS] Test 25: Slave received data byte 0xA5
+  [PASS] Test 26: hw_tx_empty_o returns to 1 after Data ACK
+  [PASS] Test 27: STOP command complete (hw_done asserted)
+  [PASS] Test 28: hw_busy_o deasserted after STOP
+  [PASS] Test 29: Both SCL and SDA released after STOP
+    [Timing] Measured t_SU;STO = 5040 ns (Target = 5000 ns, Spec >= 4000 ns)
+  [PASS] Test 30: STOP setup time t_SU;STO satisfies Spec (>= 4000 ns)
+
+--- Test Suite 6: Address NACK Detection & Abort Recovery ---
+  [PASS] Test 31: Address NACK asserted hw_ack_error_o pulse
+  [PASS] Test 32: Address NACK suppressed hw_done_o
+  [PASS] Test 33: Master returned to IDLE after NACK abort: hw_busy_o is 0
+  [PASS] Test 34: Bus lines released after NACK abort
+  [PASS] Test 35: hw_tx_empty_o restored to 1
+
+--- Test Suite 7: Data NACK Detection & Abort Recovery ---
+  [PASS] Test 36: Data NACK asserted hw_ack_error_o pulse
+  [PASS] Test 37: Data NACK suppressed hw_done_o
+  [PASS] Test 38: Master returned to IDLE after Data NACK: hw_busy_o is 0
+  [PASS] Test 39: Bus lines released after Data NACK abort
+
+--- Test Suite 8: Single-Byte Read with Master NACK & AUTO_STOP ---
+  [PASS] Test 40: Address Read ACK complete (AUTO_STOP correctly ignored on address)
+  [PASS] Test 41: Read command complete (hw_done asserted)
+  [PASS] Test 42: hw_rx_data_o matched slave TX data (0x3C)
+  [PASS] Test 43: AUTO_STOP automatically returned master to IDLE (hw_busy_o is 0)
+  [PASS] Test 44: Bus released after AUTO_STOP
+
+--- Test Suite 9: Repeated START Multi-Phase Transaction ---
+  [PASS] Test 45: Phase 1 Data written (0x11)
+  [PASS] Test 46: Repeated START complete (hw_done asserted)
+  [PASS] Test 47: hw_busy_o remained continuously asserted during Repeated START
+  [PASS] Test 48: Slave detected Repeated START
+  [PASS] Test 49: Phase 2 Read byte received (0x77)
+  [PASS] Test 50: Transaction completed with STOP
+
+--- Test Suite 10: Multi-Byte Write Burst ---
+  [PASS] Test 51: Multi-byte write byte 1 (0x10) confirmed by slave
+    Sending multi-byte byte 2 (0x20)...
+  [PASS] Test 52: Multi-byte write byte 2 (0x20) confirmed by slave
+    Sending multi-byte byte 3 (0x30)...
+  [PASS] Test 53: Multi-byte write byte 3 (0x30) confirmed by slave
+  [PASS] Test 54: Multi-byte burst finished cleanly
+
+--- Test Suite 11: Clock Stretching Tolerance ---
+  [PASS] Test 55: Write completed successfully despite 5 us clock stretching
+  [PASS] Test 56: Slave received correct data 0x5A after stretch
+
+--- Test Suite 12: Fast Mode (400 kHz) Timing Verification ---
+  [PASS] Test 57: Fast Mode START completed
+  [PASS] Test 58: Fast Mode Address transfer completed
+    [Timing] Fast Mode SCL HIGH = 1240 ns (Target = 1200 ns, Spec >= 600 ns)
+    [Timing] Fast Mode SCL LOW  = 1320 ns (Target = 1300 ns, Spec >= 1300 ns)
+  [PASS] Test 59: Fast Mode SCL HIGH satisfies Spec (>= 600 ns)
+  [PASS] Test 60: Fast Mode SCL LOW satisfies Spec (>= 1300 ns)
+  [PASS] Test 61: Fast Mode STOP completed cleanly
+
+--- Test Suite 13: SCL Handover Glitch Check ---
+  [PASS] Test 62: Zero SCL glitches observed across all test transactions
+
+--- Test Suite 14: Timeout During Data Transfer ---
+  [PASS] Test 63: hw_timeout_error_o pulsed on excessive data stretch
+  [PASS] Test 64: hw_done_o suppressed during timeout abort
+  [PASS] Test 65: Master FSM deasserts hw_busy_o after timeout
+  [PASS] Test 66: Clock generator aborted to idle: busy is 0
+  [PASS] Test 67: Clock generator stretch_wait cleared: stretch_wait is 0
+  [PASS] Test 68: Master releases SCL drive
+  [PASS] Test 69: Master releases SDA drive
+  [PASS] Test 70: hw_tx_empty_o restored to 1
+
+--- Test Suite 15: Timeout During Initial START Framing ---
+  [PASS] Test 71: hw_timeout_error_o pulsed during START when SCL held LOW
+  [PASS] Test 72: Master returned to IDLE: hw_busy_o is 0
+  [PASS] Test 73: Master released SDA after START timeout abort
+
+--- Test Suite 16: Timeout During Repeated START Framing ---
+  [PASS] Test 74: hw_timeout_error_o pulsed during Repeated START when SCL held LOW
+  [PASS] Test 75: Master returned to IDLE: hw_busy_o is 0
+  [PASS] Test 76: Master released bus lines after Repeated START timeout
+
+--- Test Suite 17: Timeout During STOP Framing ---
+  [PASS] Test 77: hw_timeout_error_o pulsed during STOP when SCL held LOW
+  [PASS] Test 78: Master returned to IDLE: hw_busy_o is 0
+  [PASS] Test 79: Master released bus lines after STOP timeout
+
+--- Test Suite 18: Register Bank & Interrupt Integration ---
+  [PASS] Test 80: STATUS.TIMEOUT_ERROR (bit 4) is asserted in register bank
+  [PASS] Test 81: IRQ.TIMEOUT_PENDING (bit 2) is asserted in register bank
+  [PASS] Test 82: Global interrupt irq_o asserts when enabled
+  [PASS] Test 83: Global interrupt irq_o deasserts after W1C clear
+  [PASS] Test 84: IRQ.TIMEOUT_PENDING cleared after W1C
+  [PASS] Test 85: STATUS.TIMEOUT_ERROR cleared after new command write
+
+--- Test Suite 19: Clean Transaction Recovery Post-Timeout ---
+  [PASS] Test 86: Subsequent START completed successfully post-timeout
+  [PASS] Test 87: hw_busy_o asserted during new transaction
+  [PASS] Test 88: Subsequent Address Write completed successfully
+  [PASS] Test 89: Slave received address 0x50
+  [PASS] Test 90: Subsequent Data Write completed successfully
+  [PASS] Test 91: Slave received data byte 0x7E
+  [PASS] Test 92: Subsequent STOP completed cleanly
+  [PASS] Test 93: Both bus lines float HIGH post-transaction
+
+============================================================================
+Task C/D Verification Results: 93 Passed, 0 Failed out of 93 Tests
+============================================================================
+>>> ALL TASK C & D VERIFICATION TESTS PASSED SUCCESSFULLY! <<<
+

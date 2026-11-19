@@ -1,0 +1,63 @@
+﻿VCD info: dumpfile sim/tb_i2c_timeout.vcd opened for output.
+==================================================================
+Starting Unit Verification: i2c_timeout (Task D)
+==================================================================
+
+--- Test Suite 1: Reset State Behavior ---
+  [PASS] Test  1: timeout_event is 0 at reset
+  [PASS] Test  2: stretch_active is 0 at reset
+  [PASS] Test  3: Internal count_q is 0 at reset
+  [PASS] Test  4: timeout_event remains 0 post-reset
+
+--- Test Suite 2: Timeout Disabled (TIMEOUT_LIMIT = 0) ---
+  [PASS] Test  5: stretch_active asserts when scl_released=1 and scl_in=0
+  [PASS] Test  6: timeout_event NEVER fires when limit is 0
+  [PASS] Test  7: count_q remains 0 when limit is 0
+
+--- Test Suite 3: SCL Rises Before Timeout Limit ---
+  [PASS] Test  8: Count reaches 4 cycles without firing event
+  [PASS] Test  9: stretch_active deasserts on SCL rise
+  [PASS] Test 10: count_q clears to 0 on SCL rise
+  [PASS] Test 11: No timeout event generated
+
+--- Test Suite 4: Master Pulls SCL LOW Clears Counter ---
+  [PASS] Test 12: Count reached 3 cycles during stretch
+  [PASS] Test 13: count_q clears to 0 when master pulls SCL LOW
+  [PASS] Test 14: stretch_active deasserts when master pulls SCL LOW
+
+--- Test Suite 5: Exact-N Cycle Assertion (N = 5) ---
+  [PASS] Test 15: Cycle 1: count=1, timeout_event=0
+  [PASS] Test 16: Cycle 2: count=2, timeout_event=0
+  [PASS] Test 17: Cycle 3: count=3, timeout_event=0
+  [PASS] Test 18: Cycle 4: count=4, timeout_event=0
+  [PASS] Test 19: Cycle 5: count=5, timeout_event=1 (EXACT-N ASSERTION!)
+  [PASS] Test 20: Cycle 6: timeout_event drops to 0 (single pulse guarantee)
+  [PASS] Test 21: Cycle 6: timeout_fired_q latched active
+  [PASS] Test 22: Continued stretch generates zero additional timeout events
+
+--- Test Suite 6: Recovery and Second Episode Re-Triggering ---
+  [PASS] Test 23: Episode end: count_q reset to 0
+  [PASS] Test 24: Episode end: timeout_fired_q cleared
+  [PASS] Test 25: Second episode fires new timeout event on 5th cycle
+  [PASS] Test 26: Second episode event deasserts after 1 cycle
+
+--- Test Suite 7: Asynchronous Reset During Active Stretch ---
+  [PASS] Test 27: Async reset immediately clears count_q to 0
+  [PASS] Test 28: Async reset immediately forces timeout_event to 0
+  [PASS] Test 29: Async reset immediately forces timeout_fired_q to 0
+
+--- Test Suite 8: SCL Rising Concurrent with Threshold Edge ---
+  [PASS] Test 30: Cycles 1-4 elapsed: count_q is 4
+  [PASS] Test 31: SCL rose on 5th edge: timeout_event suppressed (0)
+  [PASS] Test 32: SCL rose on 5th edge: count_q reset to 0
+  [PASS] Test 33: SCL rose on 5th edge: stretch_active is 0
+  [PASS] Test 34: Cycle 5: timeout_event pulsed HIGH on exact threshold
+  [PASS] Test 35: Cycle 6: timeout_event deasserted back to 0
+  [PASS] Test 36: Cycle 6: count_q cleared to 0 upon SCL rising HIGH
+  [PASS] Test 37: Cycle 6: timeout_fired_q cleared upon SCL rising HIGH
+
+==================================================================
+i2c_timeout Unit Verification Results: 37 Passed, 0 Failed
+==================================================================
+>>> ALL i2c_timeout UNIT TESTS PASSED SUCCESSFULLY! <<<
+

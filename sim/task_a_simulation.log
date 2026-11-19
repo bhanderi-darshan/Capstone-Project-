@@ -1,0 +1,89 @@
+﻿VCD info: dumpfile sim/tb_ahb_registers.vcd opened for output.
+==================================================================
+  STARTING PHASE 1 VERIFICATION: AHB-LITE SLAVE & REGISTER BANK   
+==================================================================
+[INFO] System reset deasserted.
+
+--- TEST 1: Register Reset Values ---
+[PASS] Reset CONTROL (0x00): Value = 0x00000000
+[PASS] Reset STATUS (0x04) [TX_EMPTY=1]: Value = 0x00000002
+[PASS] Reset CLOCK_DIV (0x08) [100kHz default]: Value = 0x01f401f4
+[PASS] Reset TX_DATA (0x0C): Value = 0x00000000
+[PASS] Reset RX_DATA (0x10): Value = 0x00000000
+[PASS] Reset COMMAND (0x14) [reads 0]: Value = 0x00000000
+[PASS] Reset TIMEOUT (0x18) [100k cycles]: Value = 0x000186a0
+[PASS] Reset IRQ (0x1C): Value = 0x00000000
+
+--- TEST 2: CONTROL Register Write & Masking ---
+[PASS] CONTROL Write 0x07: Value = 0x00000007
+[PASS] ctrl_enable_o port: Value = 0x00000001
+[PASS] ctrl_int_enable_o port: Value = 0x00000001
+[PASS] ctrl_auto_stop_o port: Value = 0x00000001
+[PASS] CONTROL Reserved Masking: Value = 0x00000005
+[PASS] ctrl_int_enable_o deasserted: Value = 0x00000000
+
+--- TEST 3: CLOCK_DIV Register (Fast Mode 400 kHz) ---
+[PASS] CLOCK_DIV Fast Mode: Value = 0x00820078
+[PASS] clk_high_count_o port: Value = 0x00000078
+[PASS] clk_low_count_o port: Value = 0x00000082
+
+--- TEST 4: TX_DATA Register ---
+[PASS] TX_DATA Write 0xA5: Value = 0x000000a5
+[PASS] tx_data_o port: Value = 0x000000a5
+[PASS] TX_DATA Masking: Value = 0x00000055
+[PASS] tx_data_o port masked: Value = 0x00000055
+
+--- TEST 5: TIMEOUT Register ---
+[PASS] TIMEOUT Write 0x00054321: Value = 0x00054321
+[PASS] timeout_val_o port: Value = 0x00054321
+[PASS] TIMEOUT Disabled (0): Value = 0x00000000
+
+--- TEST 6: COMMAND Pulse Generation ---
+[PASS] COMMAND read always 0: Value = 0x00000000
+[PASS] Command strobes executed without hanging.
+
+--- TEST 7: STATUS Register Hardware Updates ---
+[PASS] STATUS BUSY=1, TX_EMPTY=0: Value = 0x00000001
+[PASS] STATUS Sticky Flags Latched: Value = 0x00000007
+[PASS] STATUS Read-Only Protection: Value = 0x00000007
+[PASS] STATUS Cleared on New Command: Value = 0x00000000
+
+--- TEST 8: RX_DATA Hardware Updates & Read-on-Clear ---
+[PASS] STATUS RX_VALID == 1: Value = 0x00000001
+[PASS] RX_DATA Read 0x5A: Value = 0x0000005a
+[PASS] STATUS RX_VALID Cleared (Read-on-Clear): Value = 0x00000000
+
+--- TEST 9: IRQ Logic & Global Masking ---
+[PASS] IRQ DONE_PENDING == 1: Value = 0x00000001
+[PASS] irq_out == 0 (unmasked): Value = 0x00000000
+[PASS] irq_out == 0 (global int disabled): Value = 0x00000000
+[PASS] irq_out == 1 (active interrupt): Value = 0x00000001
+
+--- TEST 10: W1C Interrupt Clearing & Precedence ---
+[PASS] IRQ DONE_PENDING Cleared via W1C: Value = 0x00000000
+[PASS] irq_out drops to 0: Value = 0x00000000
+[PASS] Simultaneous HW Done + W1C: HW Precedence: Value = 0x00000001
+
+--- TEST 11: AHB Wait States on Read & Write ---
+[PASS] Wait-State Write & Read TX_DATA: Value = 0x0000003c
+
+--- TEST 12: Back-to-Back AHB Transfers ---
+[PASS] Back-to-Back Read CLOCK_DIV: Value = 0x02000200
+[PASS] Back-to-Back Written TX_DATA: Value = 0x00000077
+
+--- TEST 13: Invalid Register Access Handling ---
+[PASS] Invalid Addr 0x30 Read: Value = 0x00000000
+[PASS] Invalid Addr HRESP == OKAY: Value = 0x00000000
+[PASS] Invalid Addr HREADYOUT == 1: Value = 0x00000001
+[PASS] TX_DATA uncorrupted by invalid write: Value = 0x00000077
+
+==================================================================
+                      PHASE 1 TEST SUMMARY                        
+==================================================================
+  TOTAL TESTS : 46
+  PASSED      : 46
+  FAILED      : 0
+==================================================================
+  >>> ALL PHASE 1 TESTS PASSED SUCCESSFULLY! <<<
+==================================================================
+

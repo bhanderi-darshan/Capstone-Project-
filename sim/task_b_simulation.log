@@ -1,0 +1,99 @@
+﻿VCD info: dumpfile sim/tb_i2c_clock_gen.vcd opened for output.
+==================================================================
+      STARTING TASK B VERIFICATION: I2C CLOCK GENERATOR           
+==================================================================
+[INFO] System reset deasserted.
+
+--- TC01: Reset Behavior ---
+[PASS] TC01_scl_released: scl_drive_low is 0 (SCL released at reset)
+[PASS] TC01_busy_idle: busy is 0 in IDLE
+[PASS] TC01_done_idle: cycle_done is 0 in IDLE
+[PASS] TC01_stretch_idle: stretch_wait is 0 in IDLE
+
+--- TC02: Normal SCL Cycle Execution ---
+[PASS] TC02_cycle_ran: Executed cycle: low=20, high=20 cycles
+[PASS] TC02_hold_low: After cycle completion: SCL held LOW in IDLE as required
+
+--- TC03: 100 kHz Standard Mode Timing Verification ---
+[PASS] TC03_low_duration: Low duration = 500 cycles (expected 500 = 5000 ns)
+[PASS] TC03_high_duration: High duration = 500 cycles (expected 500 = 5000 ns)
+[PASS] TC03_total_period: Total period = 1000 cycles (10,000 ns = 100.00 kHz)
+
+--- TC04: 400 kHz Fast Mode Timing Verification ---
+[PASS] TC04_low_duration: Low duration = 130 cycles (expected 130 = 1300 ns)
+[PASS] TC04_high_duration: High duration = 120 cycles (expected 120 = 1200 ns)
+[PASS] TC04_total_period: Total period = 250 cycles (2,500 ns = 400.00 kHz)
+
+--- TC05: Asymmetric Timing Verification ---
+[PASS] TC05_asymm_low: Low duration = 40 cycles (expected 40)
+[PASS] TC05_asymm_high: High duration = 60 cycles (expected 60)
+
+--- TC06: cycle_done Pulse Width Verification ---
+[PASS] TC06_pulse_width: cycle_done pulse width = 1 cycle (expected exactly 1)
+
+--- TC07: No Spurious cycle_done in IDLE ---
+[PASS] TC07_idle_clean: cycle_done remained 0 throughout IDLE
+
+--- TC08: Short Clock Stretching (10 Cycles) ---
+[PASS] TC08_stretch_flag: stretch_wait is 1 while slave pulls SCL down
+[PASS] TC08_stretch_flag: stretch_wait is 1 while slave pulls SCL down
+[PASS] TC08_stretch_flag: stretch_wait is 1 while slave pulls SCL down
+[PASS] TC08_stretch_flag: stretch_wait is 1 while slave pulls SCL down
+[PASS] TC08_stretch_flag: stretch_wait is 1 while slave pulls SCL down
+[PASS] TC08_stretch_flag: stretch_wait is 1 while slave pulls SCL down
+[PASS] TC08_stretch_flag: stretch_wait is 1 while slave pulls SCL down
+[PASS] TC08_stretch_flag: stretch_wait is 1 while slave pulls SCL down
+[PASS] TC08_stretch_flag: stretch_wait is 1 while slave pulls SCL down
+[PASS] TC08_stretch_flag: stretch_wait is 1 while slave pulls SCL down
+[PASS] TC08_stretch_complete: Clock stretch released cleanly, cycle completed
+
+--- TC09: Long Clock Stretching (200 Cycles) ---
+[PASS] TC09_long_stretch: stretch_wait held active over 200 cycles
+[PASS] TC09_recovered: Recovered from 200-cycle stretch cleanly
+
+--- TC10: HIGH Phase Accuracy Post-Stretch ---
+[PASS] TC10_post_stretch_high: Post-stretch HIGH duration = 40 cycles (expected exactly 40)
+
+--- TC11: High Counter Invariant Verification ---
+[PASS] TC11_no_premature_done: High phase did NOT advance while SCL was held LOW
+
+--- TC12: Lockout Protection (Busy Ignore) ---
+[PASS] TC12_lockout_success: Spurious start_cycle while busy was correctly ignored; exactly 1 cycle_done observed
+
+--- TC13: Boundary Counts (LOW=1, HIGH=1) ---
+[PASS] TC13_min_low: Minimum LOW duration = 1 cycle (expected 1)
+[PASS] TC13_min_high: Minimum HIGH duration = 1 cycle (expected 1)
+
+--- TC14: Zero-Count Hardware Clamping ---
+[PASS] TC14_both_zero_low: LOW=0 clamped to 1 cycle (expected 1)
+[PASS] TC14_both_zero_high: HIGH=0 clamped to 1 cycle (expected 1)
+[PASS] TC14_low_zero_clamped: LOW=0 clamped to 1, HIGH=20: low=1, high=20
+[PASS] TC14_high_zero_clamped: LOW=20, HIGH=0 clamped to 1: low=20, high=1
+
+--- TC15: Synchronous Abort During Active Cycle ---
+[PASS] TC15_busy_before_abort: busy is 1 during active SCL_LOW
+[PASS] TC15_busy_cleared: busy cleared to 0 immediately on abort
+[PASS] TC15_stretch_cleared: stretch_wait is 0 on abort
+[PASS] TC15_done_suppressed: cycle_done suppressed to 0 on abort
+[PASS] TC15_scl_released: scl_drive_low deasserted to 0 on abort
+[PASS] TC15_state_idle: clock generator restored to STATE_IDLE
+
+--- TC16: Synchronous Abort Concurrent with cycle_done ---
+[PASS] TC16_done_suppressed: cycle_done strictly suppressed by concurrent abort
+[PASS] TC16_busy_cleared: busy cleared to 0 by concurrent abort
+[PASS] TC16_state_idle: returned to STATE_IDLE
+
+--- TC17: Clean Cycle Execution Post-Abort ---
+[PASS] TC17_post_abort_cycle: Post-abort cycle executed cleanly: low=10, high=10, done_width=1
+[PASS] TC17_post_abort_busy: busy is 0 after post-abort cycle completes
+
+==================================================================
+                      TASK B TEST SUMMARY                         
+==================================================================
+  TOTAL TESTS : 49
+  PASSED      : 49
+  FAILED      : 0
+==================================================================
+  >>> ALL TASK B TESTS PASSED SUCCESSFULLY! <<<
+==================================================================
+

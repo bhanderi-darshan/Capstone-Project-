@@ -1,0 +1,737 @@
+ eLSIfo2SAfiAgt2alfA2igAl
+seemnrfFrSffeAmFmTFumdrfdFfFrfSvc-ImuefcFeeSfeeafoFeueAf
+adruAdtteAfkmuofiAdnAFhhFwtefatdTpfbereAFumdrfFrSf
+vFASkFAefatdTp-.uAeuTomrnflmhedcommau
+iAdpeTufsdhFmrm
+ eLSI f So2 f Aigital Ssetem Aeeign
+seemnrfIFrncommaFnem
+ Ssetemeerilog
+lFAneufitFuFdAhm
+ FSfA f FTL Simulation
+iAdpeTufIeHetm
+ Advanced Final-eear ongineering Srotect
+H7fSc.lASal
+Ik2 ie one oo the moet widels ueed low-epeed eerial communication protocole in embedded eseteme 
+and Ssetem-on-2hip deeigne. It ie commonls ueed to communicate with eeneorecomma ooSFpmecomma FT2ecomma
+SmI2ecomma AA2ecomma AA2e and other peripheral devicee.
+Thie protect preeente the deeign and verioication oo a reueable 
+Svc-ImuefudfeeafoFeueAfadruAdtteAf
+ei
+ ueing Ssetemeerilog FTL.
+The propoeed IS providee an AHH-Lite elave interoace through which a proceeeor or bue maeter can 
+conoigure and control the Ik2 controller ueing memors-mapped regietere. The Ik2 controller 
+eupporte 7-bit elave addreeeingcomma Standard mode at 100 kHz and Faet mode at 400 kHz. It 
+implemente STAFTcomma STpScomma repeated STAFTcomma data tranemieeioncomma data reception and A2.fmA2. 
+handling.
+A mator oeature oo the propoeed deeign ie 
+oFASkFAefTtdTp-euAeuTomrnfSeueTumdr
+. An Ik2 elave mas 
+hold S2L Lp└ when it re2uiree additional proceeeing time. The maeter thereoore monitore the 
+phseical S2L line aoter releaeing it HIfH. A programmable timeout counter prevente the controller 
+orom remaining indeoinitels in the clock-etretching etate.
+The protect aleo includee a complete verioication methodologs ueing Ssetemeerilog teetbencheecomma an 
+AHH maeter modelcomma an Ik2 elave behavioral modelcomma aeeertionecomma ounctional coverage and error-
+intection teete.
+The oinal FTL can be esntheeized and implemented on an FSfA oor phseical demonetration with an
+Ik2 eeneorcomma ooSFpm or other peripheral.
+17feLlAgs0alegL
+modern So2e contain mans peripheral controllere that communicate with ewternal devicee. └hile 
+high-epeed interoacee euch ae othernetcomma =SH and S2Ie are ueed oor high-bandwidth communicationcomma
+mans low-epeed devicee uee eimple eerial protocole.
+Ik2 ie particularls popular becauee it re2uiree onls two eignal linee&
+SAA y Serial Aata
+S2L y Serial 2lock
+multiple devicee can ehare the eame bue ueing uni2ue addreeeee.
+A tspical So2 architecture ie&
+The obtective oo thie protect ie to deeign the Ik2 controller ae an independent reueable IS block.
+k7fiAgcI2of.lSl2o2Ll
+Aeeign and verios a esntheeizable 
+Svc-ImuefetFHefwFeeSfeeafhFeueAfTdruAdtteA
+ capable oo&
+Feceiving commande through AHH-Lite.
+Sroviding memors-mapped controlfetatue regietere.
+fenerating Ik2 S2L timing.
+fenerating STAFT and STpS conditione.
+Tranemitting 7-bit elave addreeeee.
+Tranemitting data bstee.
+Feceiving data bstee.
+Aetecting A2.fmA2..
+Supporting repeated STAFT.
+Supporting 100-kHz and 400-kHz operation.
+Aetecting clock etretching.
+fenerating a timeout when S2L remaine Lp└ ewceeeivels.
+Feporting errore through etatue regietere.
+Sroviding optional interrupt ounctionalits.
+Heing esntheeizable and FSfA implementable.
+z7fiAgt2alfgct2alef2.
+iAmhFA4fgwpeTumHee
+Aeeign AHH-Lite elave interoace.
+Aeeign memors-mapped regieter bank.
+Aeeign Ik2 maeter FSm.
+Implement programmable S2L generation.
+Implement STAFTfSTpS conditione.
+Implement Ik2 write operation.
+Implement Ik2 read operation.
+Implement A2.fmA2. detection.
+Implement repeated STAFT.
+Implement clock etretching.
+Implement timeout detection.
+eerios FTL ueing Ssetemeerilog.
+.eTdrSFA4fgwpeTumHee
+Add aeeertione.
+Add ounctional coverage.
+Seroorm FTL esntheeie.
+Analsze timing.
+Implement on FSfA.
+2onnect an actual Ik2 peripheral.
+.7fiAgt2alf.agi2
+The baee implementation eupporte&
+ eFucommaAe
+.commammdAu
+AHH-Lite
+eee
+1[-bit AHH data
+eee
+1[-bit AHH addreee
+eee
+Ik2 maeter
+eee
+7-bit addreeeing
+eee
+100 kHz
+eee
+400 kHz
+eee
+STAFT
+eee
+STpS
+eee
+Fepeated STAFT
+eee
+└rite
+eee
+Fead
+eee
+A2.
+eee
+mA2.
+eee
+2lock etretching
+eee
+Stretch timeout
+eee
+Interrupt
+pptional
+10-bit addreeeing
+Future
+multi-maeter arbitration
+Future
+AmA
+Future
+FIFp
+Future
+└7f.o.l2ofSAavel2al0A2
+27fs2.ebLfogs0I2.
+The protect ehould be divided into eeparate FTL modulee.
+w7fSvc-Iel2feLl2A Sa2
+The controller acte ae an 
+Svc-ImuefetFHe
+Important eignale are&
+.mnrFt
+smAeTumdr
+seeTAmmumdr
+H2L.
+AHH clock
+HFoSoTn
+Active-low reeet
+HAAAF
+Addreee
+H└AATA
+└rite data
+H└FITo
+Feadfwrite eelection
+HSoL
+Seripheral eelect
+HTFAmS
+Traneoer tspe
+HFoAAe
+Traneoer reads
+HFAATA
+putput
+Fead data
+HFoAAep=T
+putput
+Seripheral reads
+HFoSS
+putput
+Feeponee
+=7fSvcflASL. 2Afs2l2alegL
+A valid traneoer can be identioied ueing&
+The regieter interoace can uee the lower addreee bite oor regieter eelection.
+H&7fA2be.l2AfoSi
+Fecommended regieter map&
+gFFeeu
+AenmeueA
+STTeee
+seeTAmmumdr
+2pmTFpL
+Ff└
+2ontroller conoiguration
+STAT=S
+2urrent etatue
+2Lp2.xAIe
+Ff└
+S2L clock divider
+T4xAATA
+Ff└
+Tranemit data
+F4xAATA
+Feceive data
+2pmmAmA
+Traneaction command
+TImop=T
+Ff└
+Stretch timeout
+IF8
+Ff└
+Interrupt controlfetatue
+HH7fagLlAgIfA2be.l2A
+Addreee&
+Suggeeted oormat&
+cmue
+H17f.lSl0.fA2be.l2A
+Addreee&
+Suggeeted oormat&
+Hk7faIgay[seffA2be.l2A
+Addreee&
+Thie regieter determinee Ik2 clock epeed.
+For ewamplecomma io&
+For 100 kHz&
+For 400 kHz&
+Thereoore approwimatels&
+The ewact value muet be validated againet the oinal clock-generator implementation and Ik2 timing 
+re2uiremente.
+Hz7fl1[sSlSfA2be.l2A
+Addreee&
+pnls bite 
+ are re2uired oor the oiret implementation.
+owample&
+The Ik2 controller tranemite&
+mSH oiret.
+H.7fA1[sSlSfA2be.l2A
+Addreee&
+The received Ik2 bste ie etored here.
+owample&
+H└7fagooSLsfA2be.l2A
+Addreee&
+Suggeeted commande&
+The eootware writee one oo theee bite to initiate the correeponding operation.
+H27fleo2g0lfA2be.l2A
+Addreee&
+Thie regieter epecioiee the mawimum number oo esetem-clock csclee oor which the controller waite 
+oor S2L to become HIfH aoter releaeing it.
+owample&
+Io S2L remaine Lp└ besond thie value&
+Hw7feeaf 0LsSo2LlSI.
+Ik2 hae two bue eignale&
+Hoth are normalls open-drainfopen-collector eignale.
+Tspical arrangement&
+Similarls oor S2L.
+H=7fgi2L-sASeLfeoiI2o2LlSlegL
+The maeter ehould onls activels drive Lp└.
+└hen it wante HIfHcomma it releaeee the line.
+2onceptualls&
+Inpute are then eampled&
+Thie ie important becauee the elave can aleo inoluence the bue.
+1&7feeaf.lSAlfagLselegL
+STAFT ie&
+Aiagram&
+Algorithm&
+1H7feeaf.lgifagLselegL
+STpS ie&
+Algorithm&
+117feeaf]Ael2fSIbgAelvo
+Aetailed algorithm&
+1k7feeafA2SsfSIbgAelvo
+1z7fA2i2Sl2sf.lSAl
+Fepeated STAFT ie particularls important oor eeneor and ooSFpm acceeeee.
+owample&
+1.7feeaf .o
+Fecommended etatee&
+1└7f .of.lSl2fs2.aAeilegL
+.uFue
+ commarTumdr
+IALo
+└ait oor command
+STAFT
+fenerate STAFT
+AAAF
+Tranemit addreee
+AAAFxA2.
+2heck A2.
+└FITo
+Tranemit data
+└FIToxA2.
+2heck data A2.
+FoAA
+Feceive data
+FoAAxA2.
+Send A2.fmA2.
+FoSTAFT
+fenerate repeated STAFT
+STpS
+fenerate STpS
+Apmo
+Traneaction completed
+oFFpF
+orror condition
+127fsSlSf.ve lfA2be.l2A
+=ee&
+For tranemieeion&
+owample&
+Aoter evers tranemitted bit&
+1w7fcelfag0Ll2A
+=ee&
+Initialize&
+Aoter each bit&
+└hen&
+the bste ie complete.
+1=7faIgayfb2L2ASlgA
+2onceptual implementation&
+The Ik2 FSm ehould advance ite S2L phaeee ueing thie timing event.
+k&7faIgayf.lA2laveLb
+2lock etretching occure when the elave holde S2L Lp└.
+maeter&
+Slave&
+Thereoore&
+The controller muet wait.
+kH7faIgay-.lA2laveLbfSIbgAelvo
+k17faIgay-.lA2laveLbfAlI
+kk7feoigAlSLlfaIgay-.lA2laveLbf
+A0I2
+The controller muet never aeeume&
+Inetead&
+Thie ie one oo the moet important technical concepte in the protect.
+kz7feeaf]Ael2fAlIf.y2I2lgL
+Thie ie a 
+epeteudr
+. The production implementation ehould eeparate S2L lowfhigh phaeee inetead oo 
+changing the entire bste on one event.
+k.7feeafA2SsfAlIfagLa2il
+Auring readingcomma SAA muet be releaeed.
+Then&
+owample&
+At the end&
+k└7fSvcfA2be.l2AfAlI
+owample&
+k27fSvcfA2Ssfo01
+kw7flgifI2f2I
+k=7fagoiI2l2fiAgt2alfsSlSf Ig]
+z&7f.g l]SA2fsAef2AfSIbgAelvo
+The eootware driver could uee ounctione euch ae&
+For reading&
+zH7fafsAef2Afi.20sgags2
+Thie driver ie onls illuetrative3 the oinal eootware muet match the ewact command eemantice 
+implemented in the FTL.
+z17ff2Ae eaSlegLfSAavel2al0A2
+A good oinal-sear protect ehould not etop at eimulation oo the FTL.
+=ee&
+zk7fl2.lc2LavfagoigL2Ll.
+SvcfoFeueAfc o
+feneratee&
+modele&
+Addreee
+A2.
+mA2.
+Fead data
+└rite data
+2lock etretching
+pbeervee&
+.TdAewdFAS
+2omparee&
+zz7fl2.lfaS.2.
+owpected&
+la&1f;fSvcfAenmeueAf]Amue
+└rite&
+Fead it back.
+owpected&
+la&kf;f.lSAl
+eerios&
+la&zf;f.lgi
+eerios&
+la&.f;fSSSAeeefSay
+Slave reeponde&
+owpected&
+la&└f;fSSSAeeefLSay
+Slave reeponde&
+owpected&
+la&2f;f]AmuefsFuF
+Send&
+owpected elave receivee&
+Slave eende&
+owpected&
+z.7faIgay-.lA2lavfl2.l
+The elave intentionalls holde S2L Lp└.
+owpected&
+z└7fleo2g0lfl2.l
+Slave never releaeee S2L.
+owpected&
+The FSm ehould eaoels terminate or enter an error recovers etate.
+z27fA2i2Sl2sf.lSAlfl2.l
+Teet&
+Thie ie one oo the moet important practical teete.
+zw7fA2.2l-s0AeLb-lASL.SalegLfl2.l
+Start an Ik2 traneaction and aeeert reeet.
+owpected&
+z=7f.o.l2of2AeIgbfl2.lc2Lavf
+.lA0al0A2
+.&7fSvcf]Ael2flS.y
+.H7fSvcfA2SsflS.y
+Againcomma adapt theee taeke to the ewact AHH timing model ueed bs sour teetbench.
+.17feeaf.ISf2fogs2I
+The behavioral elave ehould peroorm&
+.k7fS..2AlegL.
+owample&
+.z7fleo2g0lfS..2AlegL
+..7fsgL2fi0I.2fS..2AlegL
+.└7f 0LalegLSIfagf2ASb2
+2overage ehould include&
+owample&
+.27ff2Ae eaSlegLfoSlAe1
+ eFucommaAe
+smAeTueS
+AFrSdh
+SeeeAumdr
+adHeAFne
+AHH └rite
+AHH Fead
+STAFT
+STpS
+└rite
+Fead
+A2.
+mA2.
+Fepeated STAFT
+2lock Stretch
+Timeout
+Feeet
+.w7f ibSfeoiI2o2LlSlegL
+Aoter eimulation&
+.=7f ibSfs2ogL.lASlegL
+A good demonetration ie&
+Soeeible peripherale&
+Ik2 temperature eeneor
+ooSFpm
+FT2
+pLoA dieplas
+Accelerometer
+fSIp ewpander
+└&7f ibSfs2ogf21SoiI2
+=ee an ooSFpm.
+└rite&
+Then read it back.
+owpected&
+Aieplas&
+on =AFT or an FSfA dieplas.
+└H7f.oLlv2.e.fSLSIo.e.
+Studente ehould record&
+iFAFheueA
+Aeecommatu
+L=Te
+THA
+Flip-Flope
+THA
+Ifp
+THA
+iFAFheueA
+Aeecommatu
+HFAm
+THA
+mawimum Fre2uencs
+THA
+Timing Slack
+THA
+Sower
+pptional
+Ao not invent theee numbere. Thes muet come orom the eelected FSfA and esntheeie tool.
+└17fleoeLbfSLSIo.e.
+2heck&
+Aleo meaeure actual&
+ueing eimulation andcomma ideallscomma an oecilloecope or logic analszer.
+└k7fiAgt2alfi2A gAoSLa2fo2lAea.
+The protect can be evaluated ueing&
+ commarTumdrFtfTdAAeTureee
+adHeAFne
+vFASkFAefheuAmTe
+eeafheuAmTe
+└z7f21i2al2sfA2.0Il.
+The completed protect ehould demonetrate&
+2orrect AHH regieter acceee.
+2orrect Ik2 STAFT.
+2orrect addreee tranemieeion.
+2orrect A2.fmA2. detection.
+2orrect data tranemieeion.
+2orrect data reception.
+2orrect STpS.
+2orrect repeated STAFT.
+2orrect 100-kHz operation.
+2orrect 400-kHz operation.
+2orrect clock-etretch handling.
+2orrect timeout handling.
+2orrect reeet recovers.
+Succeeeoul esntheeie.
+Succeeeoul FSfA operation.
+└.7f.l0s2LlflS.yfse.lAec0legL
+For a oour-member team&
+.ucommaSerufHf;fSvc-Imue
+Feeponeible oor&
+AHH interoace
+Fegieter map
+Feadfwrite logic
+Hue verioication
+.ucommaSeruf1f;feeaf .o
+Feeponeible oor&
+STAFT
+STpS
+Addreee
+└rite
+Fead
+A2.fmA2.
+.ucommaSerufkf;flmhmrn
+Feeponeible oor&
+2lock divider
+S2L generation
+2lock etretching
+Timeout
+orror handling
+.ucommaSerufzf;ffeAmFmTFumdr
+Feeponeible oor&
+Teetbench
+AHH HFm
+Ik2 elave model
+Scoreboard
+Aeeertione
+2overage
+All etudente participate in&
+└└7fH└-]22yfiAgt2alfiISL
+]eep
+]dAp
+Introduction and re2uiremente
+AHH-Lite etuds
+Ik2 protocol etuds
+Architecture and regieter deeign
+AHH FTL
+AHH verioication
+2lock generator
+STAFTfSTpS
+Addreee 5 A2.
+└rite
+Fead
+Fepeated STAFT
+2lock etretching
+Timeout 5 error handling
+eerioication 5 esntheeie
+FSfA 5 oinal preeentation
+└27fiAgt2alfs2Ief2AScI2.
+Studente ehould eubmit&
+vFASkFAefseemnr
+Ssetem architecture
+Hlock diagram
+FTL eource
+Fegieter epecioication
+Timing diagrame
+feAmFmTFumdr
+Teetbench
+Teet caeee
+Slave model
+Aeeertione
+2overage
+Simulation waveoorme
+ehmteheruFumdr
+Ssntheeie report
+Timing report
+FSfA bitetream
+FSfA demonetration
+sdTcommaheruFumdr
+Final report
+=eer guide
+FTL documentation
+eerioication report
+Sreeentation
+fit repoeitors
+└w7fA2agoo2Ls2sfbelfA2ig.elgAo
+└=7f 0l0A2f2LvSLa2o2Ll.
+pnce the baeic protect workecomma etudente can add&
+multi-bste traneoere
+T4fF4 FIFp
+Interrupte
+10-bit Ik2 addreee
+Hue recovers
+Arbitration detection
+AmA
+ASH interoace
+A4I4-Lite interoace
+FIS2-e integration
+Linuw device driver
+=em verioication
+Formal verioication
+ASI2 esntheeie
+STA
+Sower analseie
+2&7fSsfSLa2sff2A.egL
+For a etronger oinal-sear protectcomma rename the protect&
+seemnrfFrSffeAmFmTFumdrfdFfFfadrFmncommaAFwtefSvc-ImuefudfeeafoFeueAfeifkmuofatdTpf
+.uAeuTomrn!f2AAdAfAeTdHeA4fFrSfiAdnAFhhFwteflmhmrn
+Additional oeaturee&
+That becomee cloeer to an actual reueable commercial IS.
+2H7fiAgt2alfLgf2Ilo
+The protect iteelo ie baeed on etandard technologieecomma eo the novelts ehould 
+rdu
+ be claimed ae 
+6inventing Ik2.6
+Ineteadcomma etudente can preeent the contribution ae&
+6A modularcomma conoigurable and verioication-oriented AHH-Lite Ik2 maeter IS 
+incorporating programmable timingcomma hardware clock-etretch monitoring and timeout-
+baeed recovers.6
+Soeeible reeearchfprotect contribution&
+Sarameterized clock generation
+Hardware etretch monitoring
+Automatic error recovers
+Aeeertion-baeed verioication
+FSfA implementation
+Feueable So2 IS architecture
+217fIeoelSlegL.
+The baee vereion hae eeveral limitatione&
+Single maeter.
+7-bit addreeeing.
+mo AmA.
+mo large FIFp.
+mo complete multi-maeter arbitration.
+Sootware-driven traneactione.
+Limited automatic traneaction ee2uencing.
+Theee ehould be clearls mentioned in the oinal report rather than hiding them.
+2k7fSaa2ilSLa2faAel2AeS
+The protect can be coneidered eucceeeoulls completed when&
+Svc
+Fegieter write worke.
+Fegieter read worke.
+Feeet worke.
+eea
+STAFT worke.
+STpS worke.
+Addreee worke.
+└rite worke.
+Fead worke.
+A2. worke.
+mA2. worke.
+Fepeated STAFT worke.
+SSHFrTeS
+100-kHz operation worke.
+400-kHz operation worke.
+2lock etretching worke.
+Timeout worke.
+feAmFmTFumdr
+All mandators teet caeee paee.
+mo critical aeeertion oailuree.
+2overage reachee the protect-deoined target.
+ ibS
+At leaet one real Ik2 device communicatee eucceeeoulls.
+2z7ffefSf002.legL.
+0H7f]oFufmefeeax
+Ik2 ie a esnchronoue two-wire eerial communication protocol ueing SAA and S2L.
+017f]o4fSdeefeeafcommaeefdmer-SAFmrfdcommaumcommauex
+To allow multiple devicee to ehare the bue and to eupport wired-AmA behavior.
+0k7f]oFufmefSayx
+A2. ie generated bs the receiver bs pulling SAA Lp└ during the ninth clock pulee.
+0z7f]oFufmefLSayx
+mA2. occure when SAA remaine HIfH during the ninth clock pulee.
+0.7f]oFufmefTtdTpfeuAeuTomrnx
+2lock etretching occure when an Ik2 elave holde S2L Lp└ to delas the maeter.
+2.7fSsfSLa2sffefSf002.legL.
+0H7f]o4fTFr4ufuoefhFeueAfFeecommahef.aIfmefvebvfFFueAfAeteFemrnfmux
+Hecauee an Ik2 elave can hold S2L Lp└.
+017f]o4fmefFfumhedcommaufAe8commamAeSx
+To prevent the controller orom remaining indeoinitels in a clock-etretching etate.
+0k7f]o4fmef.sSfeFhmteSfdrt4fScommaAmrnfuoefFmmAdmAmFuef.aIfmoFeex
+Hecauee Ik2 data muet remain etable while S2L ie HIfH.
+0z7f]o4fmefAemeFueSf.lSAlfAe8commamAeSx
+It allowe the maeter to change traneaction direction without releaeing the bue.
+0.7f]oFufoFmmerefmFfuoefetFHefSdeer4ufFTprdkteSnefmuefFSSAeeex
+The controller ehould detect mA2.comma eet an error etatue and terminate or recover according to ite 
+command conoiguration.
+0└7f]o4fcommaeefFrf .ox
+Ik2 communication coneiete oo well-deoined ee2uential protocol phaeeecomma making FSm 
+implementation natural and verioiable.
+027f]o4fcommaeefFfAenmeueAfmrueAFFTex
+It allowe a proceeeor to conoigure and control the IS ueing etandard memors-mapped acceeeee.
+2└7f eLSIfiAgt2alf Ig]
+The entire protect ehould oollow thie methodologs&
+227f eLSIfA2igAlfavSil2Af
+.lA0al0A2
+For the etudentez actual college reportcomma I recommend&
+aoFmueAfHf;feruAdScommaTumdr
+Hackground
+motivation
+Sroblem etatement
+pbtectivee
+Scope
+aoFmueAf1f;fImueAFucommaAe3leTordtdn4f.ucommaS4
+AHH-Lite
+owieting Ik2 controllere
+FSfAfSo2 architecture
+aoFmueAfkf;f.4euehfAe8commamAeherue
+Functional re2uiremente
+mon-ounctional re2uiremente
+Fegieter map
+Timing re2uiremente
+aoFmueAfzf;fSATomueTucommaAe
+Hlock diagram
+AHH interoace
+Fegieter bank
+Ik2 FSm
+2lock generator
+2lock etretching
+aoFmueAf.f;fAlIfseemnr
+Ssetemeerilog
+FSm
+Fegietere
+Timing logic
+orror handling
+aoFmueAf└f;ffeAmFmTFumdr
+Teetbench
+HFm
+Slave model
+Teet caeee
+Aeeertione
+2overage
+aoFmueAf2f;fAeecommatue
+└aveoorme
+Functional reeulte
+2overage
+Ssntheeie
+Timing
+aoFmueAfwf;f ibSfehmteheruFumdr
+FSfA architecture
+Sin conoiguration
+Hardware eetup
+Feal Ik2 communication
+aoFmueAf=f;fImhmuFumdrefFrSf commaucommaAef.Tdme
+aoFmueAfH&f;fadrTtcommaemdr
+2w7fog.lfeoigAlSLlf
+A2agoo2LsSlegL
+For a 
+FmrFt-4eFAfeucommaSerufmAdpeTu
+comma donzt aek etudente to write the entire FTL at once.
+=ee theee mileetonee&
+Thie makee the protect 
+hFrFneFwte!fheFecommaAFwte!fFrSfueFToFwte
+comma while etill being advanced 
+enough to demonetrate genuine So2fIS-deeign ekille.
+grefueTormTFtfTFcommaumdrm
+ the FTL enippete above are intentionalls 
+mhmteheruFumdrfepeteudre
+comma not a 
+claim oo a production-certioied Ik2 controller. For the oinal etudent implementationcomma the S2L 
+lowfhigh phaeeecomma SAA eetupfhold timingcomma esnchronization oo eampled S2LfSAAcomma reeet behaviorcomma 
+AHH timingcomma and open-drain FSfA Ifp need to be completed and verioied againet the eelected Ik2 
+and AHH-Lite epecioicatione.

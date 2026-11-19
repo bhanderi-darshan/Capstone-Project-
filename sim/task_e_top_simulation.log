@@ -1,0 +1,108 @@
+﻿VCD info: dumpfile sim/tb_i2c_master_top.vcd opened for output.
+============================================================================
+  STARTING TASK E STEP 3: FULL-CHIP SYSTEM VERIFICATION (i2c_master_top)    
+============================================================================
+[INFO] System reset deasserted. Physical lines: SCL=1, SDA=1
+
+--- SCENARIO 1: Reset & AHB Register Access Verification ---
+  [PASS] Test  1: Reset CONTROL -- Value = 0x00000000
+  [PASS] Test  2: Reset STATUS (TX_EMPTY=1) -- Value = 0x00000002
+  [PASS] Test  3: Reset CLOCK_DIV (500/500) -- Value = 0x01f401f4
+  [PASS] Test  4: Reset TIMEOUT (100k cycles) -- Value = 0x000186a0
+  [PASS] Test  5: Reset IRQ (0) -- Value = 0x00000000
+  [PASS] Test  6: Write/Read CLOCK_DIV (400kHz) -- Value = 0x00820078
+  [PASS] Test  7: Write/Read TX_DATA (0xA5) -- Value = 0xa5
+  [PASS] Test  8: Unmapped Write HRESP OKAY -- HRESP is OKAY
+  [PASS] Test  9: Unmapped Read Returns 0 -- Value = 0x00000000
+  [PASS] Test 10: TX_DATA Uncorrupted -- TX_DATA remains 0xA5
+
+--- SCENARIO 2: Open-Drain Physical Line Verification ---
+  [PASS] Test 11: SCL Floats HIGH in IDLE -- SCL line is 1 via pull-up
+  [PASS] Test 12: SDA Floats HIGH in IDLE -- SDA line is 1 via pull-up
+  [PASS] Test 13: irq_o Deasserted in IDLE -- irq_o is LOW
+
+--- SCENARIO 3: START Framing & Slave Address ACK ---
+  [PASS] Test 14: STATUS.BUSY Asserted after START -- BUSY is 1
+  [PASS] Test 15: START Completed without Timeout -- DONE is 1
+  [PASS] Test 16: Slave Detected START -- slv_start_seen is 1
+  [PASS] Test 17: Address Phase DONE -- DONE is 1
+  [PASS] Test 18: Address ACKed (No ACK_ERROR) -- ACK_ERROR is 0
+  [PASS] Test 19: Slave Captured Matching Address -- Addr=0x50, RW=0
+
+--- SCENARIO 4: Data Byte Write with Slave ACK ---
+  [PASS] Test 20: Data Byte 1 DONE -- DONE is 1
+  [PASS] Test 21: Data Byte 1 ACKed -- No ACK error
+  [PASS] Test 22: Slave Received Byte 0x3C -- Data=0x3c
+  [PASS] Test 23: Data Byte 2 DONE -- DONE is 1
+  [PASS] Test 24: Data Byte 2 ACKed -- No ACK error
+  [PASS] Test 25: Slave Received Byte 0x7E -- Data=0x7e
+
+--- SCENARIO 5: STOP Framing Verification ---
+  [PASS] Test 26: STOP Framing DONE -- DONE is 1
+  [PASS] Test 27: STATUS.BUSY Deasserted post-STOP -- BUSY is 0
+  [PASS] Test 28: Slave Detected STOP Condition -- slv_stop_seen is 1
+  [PASS] Test 29: SCL Floats HIGH post-STOP -- SCL line released
+  [PASS] Test 30: SDA Floats HIGH post-STOP -- SDA line released
+
+--- SCENARIO 6: Slave Address NACK & Automatic Abort ---
+  [PASS] Test 31: NACK Error Detected -- STATUS.ACK_ERROR is 1
+  [PASS] Test 32: hw_done Suppressed on NACK -- STATUS.DONE is 0
+  [PASS] Test 33: Controller Aborted to IDLE -- BUSY returned to 0
+  [PASS] Test 34: Bus Lines Released post-NACK -- SCL and SDA float HIGH
+
+--- SCENARIO 7: Data Read with Master NACK & Read-on-Clear ---
+  [PASS] Test 35: Read START Complete -- DONE is 1
+  [PASS] Test 36: Read Address Phase ACKed -- No ACK error
+  [PASS] Test 37: Read Operation Completed (DONE) -- DONE is 1
+  [PASS] Test 38: STATUS.RX_VALID Asserted -- RX_VALID is 1
+  [PASS] Test 39: Read Data Matches 0xD5 -- RX_DATA = 0xd5
+  [PASS] Test 40: STATUS.RX_VALID Cleared (Read-on-Clear) -- RX_VALID is 0
+  [PASS] Test 41: Read Transaction STOP Complete -- BUSY is 0
+
+--- SCENARIO 8: Repeated START Sequence ---
+  [PASS] Test 42: Pre-Restart Write Completed -- Slave received 0x44
+  [PASS] Test 43: Repeated START DONE -- DONE is 1
+  [PASS] Test 44: STATUS.BUSY Continuously 1 During Restart -- BUSY remains 1
+  [PASS] Test 45: Post-Restart Read DONE -- DONE is 1
+  [PASS] Test 46: Post-Restart RX_VALID Asserted -- RX_VALID is 1
+  [PASS] Test 47: Post-Restart Read Data Matches 0x66 -- RX_DATA = 0x66
+  [PASS] Test 48: Restart Transaction STOP Completed -- BUSY is 0
+
+--- SCENARIO 9: Hardware Clock-Stretching Tolerance ---
+  [PASS] Test 49: Clock-Stretched Transfer Completed -- DONE is 1
+  [PASS] Test 50: No Stretch Timeout Error -- TIMEOUT_ERROR is 0
+  [PASS] Test 51: Data 0x5A Captured Intact -- Captured=0x5a
+
+--- SCENARIO 10: Hardware Clock-Stretching Timeout Detection ---
+  [PASS] Test 52: Timeout Error Detected -- STATUS.TIMEOUT_ERROR is 1
+  [PASS] Test 53: Timeout Forces BUSY to 0 -- STATUS.BUSY is 0
+  [PASS] Test 54: Timeout Abort Suppressed DONE -- STATUS.DONE is 0
+
+--- SCENARIO 11: System Interrupt Logic & W1C Clearing ---
+  [PASS] Test 55: irq_o Asserted on Prior Timeout -- irq_o is 1
+  [PASS] Test 56: IRQ.TIMEOUT_PENDING Asserted -- TIMEOUT_PENDING is 1
+  [PASS] Test 57: All IRQ Pending Flags Cleared -- Pending flags are 0
+  [PASS] Test 58: irq_o Deasserted After W1C Clear -- irq_o is 0
+  [PASS] Test 59: irq_o Asserted upon DONE -- irq_o is 1
+  [PASS] Test 60: IRQ.DONE_PENDING Asserted -- DONE_PENDING is 1
+  [PASS] Test 61: IRQ.DONE_PENDING Cleared -- DONE_PENDING is 0
+  [PASS] Test 62: irq_o Deasserted post-W1C -- irq_o is 0
+
+--- SCENARIO 12: Recovery & New Transaction Post-Timeout ---
+  [PASS] Test 63: Bus Free post-recovery (SCL=1, SDA=1) -- Bus is free
+  [PASS] Test 64: Post-Timeout START Successful -- START DONE
+  [PASS] Test 65: Post-Timeout Address ACKed -- Address ACKed
+  [PASS] Test 66: Post-Timeout Data Byte 0x99 ACKed -- Slave received 0x99
+  [PASS] Test 67: Post-Timeout STOP Complete -- BUSY is 0
+  [PASS] Test 68: Final Bus State Floats HIGH -- Both lines High-Z
+
+============================================================================
+                      TASK E STEP 3 TEST SUMMARY                            
+============================================================================
+  TOTAL VERIFICATION CHECKS : 68
+  PASSED                    : 68
+  FAILED                    : 0
+============================================================================
+  >>> ALL TASK E FULL-CHIP VERIFICATION CHECKS PASSED SUCCESSFULLY! <<<
+============================================================================
+
